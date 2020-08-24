@@ -14,7 +14,7 @@ jobs:
 
     - name: set environment variables
       run: |
-        echo ::set-env name=PYTHON_VERSION::3.6.11
+        echo ::set-env name=PYTHON_VERSION::3.8.5
     - name: setup virtual environment
       run: |
         make setup

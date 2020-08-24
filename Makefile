@@ -20,7 +20,7 @@ endef
 
 .PHONY: help dependencies pyenv setup clean
 
-PYTHON_VERSION?=3.6.8
+PYTHON_VERSION?=3.8.5
 VENV_PROMT=$(basename "${PWD}")
 VENV_DIR?=.venv
 VENV_ACTIVATE=. $(VENV_DIR)/bin/activate

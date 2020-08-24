@@ -1,5 +1,7 @@
 ssher.egg-info
 
+*.orig
+
 # Unit test / coverage reports
 htmlcov/
 .tox/

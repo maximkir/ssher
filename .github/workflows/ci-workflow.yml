@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: set environment variables
+      run: |
+        echo ::set-env name=PYTHON_VERSION::3.6.11
+    - name: setup virtual environment
+      run: |
+        make setup
+    - name: check python version
+      run: |
+        source activate.sh
+        python -c "import platform; assert platform.python_version() == \"${PYTHON_VERSION}\""
+    - name: check test target
+      run: |
+        make test
+        source activate.sh
+        pytest --version
+    - name: check clean target
+      run: |
+        make clean

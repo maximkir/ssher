@@ -39,7 +39,7 @@ endif
 prerequisites: $(OS)
 
 Darwin:
-	brew update
+	brew update-reset
 	$(call brew_install,openssl)
 	$(call brew_install_or_upgrade,pyenv)
 

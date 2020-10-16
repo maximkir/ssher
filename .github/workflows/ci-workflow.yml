@@ -24,9 +24,7 @@ jobs:
         python -c "import platform; assert platform.python_version() == \"${PYTHON_VERSION}\""
     - name: black formatting
       run: |
-        make test
-        source activate.sh
-        black ssher --check
+        make test black
     - name: check clean target
       run: |
         make clean

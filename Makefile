@@ -78,6 +78,9 @@ setup: prerequisites pyenv dependencies
 test:
 	@test ! -f "requirements-test.txt" || ($(VENV_ACTIVATE); pip install -r requirements-test.txt)
 
+black:
+	$(VENV_ACTIVATE); black --check ssher/
+
 clean:
 	@rm -rf ${VENV_DIR}
 	@rm -f .python-version

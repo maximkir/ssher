@@ -15,12 +15,11 @@ def connect(hostname, username, config):
 
     container = AppContainer()
     container.config.from_yaml(config)
-
-    # identity key factory
-
-    print(container.config()[hostname])
+    print(container.config.hostname())
+    identity_key = container.identity_key_factory(
+        getattr(container.config, hostname).identity_key.loader.name()
+    )
 
     container.ssh_connection(
-        username=username,
-        hostname=hostname,
+        username=username, hostname=hostname, identity_key=identity_key
     ).create()

@@ -10,10 +10,11 @@ class AppContainer(containers.DeclarativeContainer):
 
     os_runner = providers.Singleton(os.CmdRunner)
 
-    identity_key_store = providers.Selector(
-
-        lpass=providers.Factory(lpass.LastPassIdentityKey),
-        default=providers.Factory(entities.IdentityKey)
+    identity_key_factory = providers.FactoryAggregate(
+        lastpass=providers.Factory(lpass.LastPassIdentityKey),
+        default=providers.Factory(entities.IdentityKey),
     )
 
-    ssh_connection = providers.Factory(use_cases.EstablishSshConnection, os_runner=os_runner)
+    ssh_connection = providers.Factory(
+        use_cases.EstablishSshConnection, os_runner=os_runner
+    )

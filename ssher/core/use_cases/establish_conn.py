@@ -14,7 +14,5 @@ class EstablishSshConnection:
     def create(self):
         with self.identity_key:
             ShhConnection(
-                username=self.username,
-                hostname=self.hostname,
-                os=self.os_runner
+                username=self.username, hostname=self.hostname, os=self.os_runner
             ).connect()

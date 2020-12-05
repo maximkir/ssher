@@ -39,7 +39,7 @@ endif
 prerequisites: $(OS)
 
 Darwin:
-	brew update
+	brew update-reset
 	$(call brew_install,openssl)
 	$(call brew_install_or_upgrade,pyenv)
 
@@ -77,6 +77,9 @@ setup: prerequisites pyenv dependencies
 
 test:
 	@test ! -f "requirements-test.txt" || ($(VENV_ACTIVATE); pip install -r requirements-test.txt)
+
+black:
+	$(VENV_ACTIVATE); black --check ssher/
 
 clean:
 	@rm -rf ${VENV_DIR}

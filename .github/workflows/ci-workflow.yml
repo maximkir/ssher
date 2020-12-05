@@ -9,12 +9,10 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    env:
+      PYTHON_VERSION: 3.8.5
     steps:
     - uses: actions/checkout@v2
-
-    - name: set environment variables
-      run: |
-        echo "PYTHON_VERSION=3.8.5" >> $GITHUB_ENV
     - name: setup virtual environment
       run: |
         make setup

@@ -21,7 +21,7 @@ jobs:
         make test-venv
     - name: black formatting
       run: |
-        make test black
+        make black
     - name: check clean target
       run: |
         make clean

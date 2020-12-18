@@ -1,12 +1,13 @@
 from ssher.core import entities
-from ssher import utils
+from ssher.infrastructure.os import OS
 
 
 class LastPassIdentityKey(entities.IdentityKey):
-    def __init__(self, username, key_entry):
+    def __init__(self, username: str, key_entry: str, os_runner: OS):
         self._username = username
         # TODO: ensure that the entry exists inside the vault
         self._key_entry = key_entry
+        self._os_runner = os_runner
         self._identity_key = None
         self._passphrase = None
 
@@ -27,17 +28,16 @@ class LastPassIdentityKey(entities.IdentityKey):
 
     def _login(self):
         while not self._is_logged_in():
-            utils.pexpect_spawn(
+            self._os_runner.spawn_child_interact(
                 f"lpass login --color=never {self._username}"
-            ).interact()
+            )
 
     def _is_logged_in(self):
-        return (
-            f"Logged in as {self._username}."
-            in utils.pexpect_spawn("lpass status --color=never").read()
+        return f"Logged in as {self._username}." in self._os_runner.spawn_child_read(
+            "lpass status --color=never"
         )
 
     def _read_entry_field(self, field):
-        return utils.pexpect_spawn(
+        return self._os_runner.pexpect_spawn_read(
             f'lpass show --color=never --field="{field}" {self._key_entry}'
-        ).read()
+        )

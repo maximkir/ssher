@@ -11,7 +11,7 @@ class AppContainer(containers.DeclarativeContainer):
     os_runner = providers.Singleton(os.CmdRunner)
 
     identity_key_factory = providers.FactoryAggregate(
-        lastpass=providers.Factory(lpass.LastPassIdentityKey),
+        lastpass=providers.Factory(lpass.LastPassIdentityKey, os_runner=os_runner),
         default=providers.Factory(entities.IdentityKey),
     )
 

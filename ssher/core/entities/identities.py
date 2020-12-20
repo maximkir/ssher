@@ -1,7 +1,11 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class IdentityKey:
 
-    key: str
-    passphrase: str
+    key: str = None
+    passphrase: str = None
 
     def __enter__(self):
         ...

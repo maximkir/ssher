@@ -1,0 +1,21 @@
+---
+version: "2.1"
+services:
+  openssh-server:
+    image: ghcr.io/linuxserver/openssh-server@sha256:4a4f2d628cde2b0435c88a80509decd2625d7195cf3ef0c68d2ab07e06865481
+    container_name: openssh-server
+    hostname: openssh-server
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+#      - PUBLIC_KEY=yourpublickey #optional
+#      - PUBLIC_KEY_FILE=/path/to/file #optional
+      - SUDO_ACCESS=false
+      - PASSWORD_ACCESS=true
+      - USER_PASSWORD=password #optional
+#      - USER_PASSWORD_FILE=/path/to/file #optional
+      - USER_NAME=linuxserver.io #optional
+    ports:
+      - 2222:2222
+    restart: unless-stopped

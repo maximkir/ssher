@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     env:
       PYTHON_VERSION: 3.8.5
     steps:
@@ -18,8 +18,7 @@ jobs:
         make setup
     - name: check python version
       run: |
-        source activate.sh
-        python -c "import platform; assert platform.python_version() == \"${PYTHON_VERSION}\""
+        make test-venv
     - name: black formatting
       run: |
         make test black
